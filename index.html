@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人简历 · Resume</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --accent-light: #5dade2;
+            --sidebar-bg: #1e2a3a;
+            --sidebar-text: #ecf0f1;
+            --main-bg: #ffffff;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --border: #e0e6ed;
+            --tag-bg: #eaf4fb;
+        }
+
+        html, body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        .resume {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--main-bg);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            min-height: 1400px;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== 左侧栏 ===== */
+        .sidebar {
+            background: linear-gradient(180deg, var(--sidebar-bg) 0%, #2c3e50 100%);
+            color: var(--sidebar-text);
+            padding: 40px 30px;
+            position: relative;
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(52,152,219,0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(30%, -30%);
+        }
+
+        .avatar {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 56px;
+            font-weight: 600;
+            color: white;
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.4);
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .name {
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .title {
+            font-size: 14px;
+            text-align: center;
+            color: var(--accent-light);
+            margin-bottom: 32px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 30px 0 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--accent-light);
+            font-size: 18px;
+        }
+
+        .contact-list {
+            list-style: none;
+        }
+
+        .contact-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 14px;
+            font-size: 14px;
+            color: rgba(236, 240, 241, 0.85);
+            word-break: break-all;
+        }
+
+        .contact-list i {
+            width: 20px;
+            color: var(--accent-light);
+            margin-right: 12px;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-item {
+            margin-bottom: 14px;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 6px;
+            color: rgba(236, 240, 241, 0.95);
+        }
+
+        .skill-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .skill-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            border-radius: 3px;
+            transition: width 1s ease;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: rgba(52, 152, 219, 0.15);
+            color: var(--accent-light);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+
+        /* ===== 右侧栏 ===== */
+        .main {
+            padding: 50px 50px;
+            background: var(--main-bg);
+        }
+
+        .main-section {
+            margin-bottom: 36px;
+        }
+
+        .main-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .main-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 22px;
+            padding-bottom: 12px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .main-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            border-radius: 2px;
+        }
+
+        .main-title i {
+            color: var(--accent);
+            font-size: 20px;
+        }
+
+        .about-text {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 24px;
+            border-left: 2px solid var(--border);
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.15);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+            gap: 10px;
+        }
+
+        .item-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .item-subtitle {
+            font-size: 14px;
+            color: var(--accent);
+            margin-top: 2px;
+        }
+
+        .item-date {
+            font-size: 13px;
+            color: var(--text-light);
+            background: var(--tag-bg);
+            padding: 4px 12px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .item-content {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .item-content ul {
+            margin-top: 8px;
+            padding-left: 20px;
+        }
+
+        .item-content li {
+            margin-bottom: 4px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .project-tag {
+            background: var(--tag-bg);
+            color: var(--accent);
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 900px) {
+            .resume {
+                grid-template-columns: 1fr;
+                margin: 0 15px;
+                min-height: auto;
+            }
+
+            .sidebar {
+                padding: 40px 25px;
+            }
+
+            .main {
+                padding: 40px 30px;
+            }
+
+            .avatar {
+                width: 120px;
+                height: 120px;
+                font-size: 48px;
+            }
+
+            .name {
+                font-size: 26px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px 0;
+            }
+
+            .resume {
+                margin: 0 10px;
+                border-radius: 8px;
+            }
+
+            .sidebar {
+                padding: 30px 20px;
+            }
+
+            .main {
+                padding: 30px 20px;
+            }
+
+            .avatar {
+                width: 100px;
+                height: 100px;
+                font-size: 40px;
+                margin-bottom: 18px;
+            }
+
+            .name {
+                font-size: 22px;
+            }
+
+            .title {
+                font-size: 12px;
+                margin-bottom: 24px;
+            }
+
+            .section-title {
+                font-size: 15px;
+                margin: 24px 0 14px;
+            }
+
+            .main-title {
+                font-size: 19px;
+                margin-bottom: 18px;
+            }
+
+            .item-title {
+                font-size: 15px;
+            }
+
+            .item-date {
+                font-size: 12px;
+            }
+
+            .item-header {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .about-text {
+                font-size: 14px;
+            }
+
+            .timeline-item {
+                padding-left: 22px;
+            }
+        }
+
+        /* ===== 打印样式 ===== */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .resume {
+                box-shadow: none;
+                border-radius: 0;
+                max-width: 100%;
+                min-height: auto;
+            }
+            .sidebar {
+                background: var(--sidebar-bg) !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        /* 滚动条美化 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-light);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <div class="resume">
+        <!-- ===== 左侧栏 ===== -->
+        <aside class="sidebar">
+            <div class="avatar">
+                <!-- 可替换为真实头像: <img src="avatar.jpg" alt="头像"> -->
+                SSY
+            </div>
+            <h1 class="name">孙思怡</h1>
+            <p class="title">高级前端工程师</p>
+
+            <!-- 联系方式 -->
+            <h2 class="section-title"><i class="fas fa-address-book"></i>联系方式</h2>
+            <ul class="contact-list">
+                <li><i class="fas fa-phone"></i><span>+86 138-0000-0000</span></li>
+                <li><i class="fas fa-envelope"></i><span>sunsiyi@example.com</span></li>
+                <li><i class="fab fa-weixin"></i><span>sunsiyi_wx</span></li>
+                <li><i class="fab fa-github"></i><span>github.com/sunsiyi</span></li>
+                <li><i class="fas fa-map-marker-alt"></i><span>北京市 · 海淀区</span></li>
+            </ul>
+
+            <!-- 专业技能 -->
+            <h2 class="section-title"><i class="fas fa-code"></i>专业技能</h2>
+            <ul class="skill-list">
+                <li class="skill-item">
+                    <div class="skill-name"><span>JavaScript / TypeScript</span><span>95%</span></div>
+                    <div class="skill-bar"><div class="skill-fill" style="width: 95%;"></div></div>
+                </li>
+                <li class="skill-item">
+                    <div class="skill-name"><span>React / Vue</span><span>90%</span></div>
+                    <div class="skill-bar"><div class="skill-fill" style="width: 90%;"></div></div>
+                </li>
+                <li class="skill-item">
+                    <div class="skill-name"><span>Node.js</span><span>85%</span></div>
+                    <div class="skill-bar"><div class="skill-fill" style="width: 85%;"></div></div>
+                </li>
+                <li class="skill-item">
+                    <div class="skill-name"><span>HTML5 / CSS3</span><span>92%</span></div>
+                    <div class="skill-bar"><div class="skill-fill" style="width: 92%;"></div></div>
+                </li>
+                <li class="skill-item">
+                    <div class="skill-name"><span>Webpack / Vite</span><span>80%</span></div>
+                    <div class="skill-bar"><div class="skill-fill" style="width: 80%;"></div></div>
+                </li>
+                <li class="skill-item">
+                    <div class="skill-name"><span>Python</span><span>70%</span></div>
+                    <div class="skill-bar"><div class="skill-fill" style="width: 70%;"></div></div>
+                </li>
+            </ul>
+
+            <!-- 语言能力 -->
+            <h2 class="section-title"><i class="fas fa-language"></i>语言能力</h2>
+            <ul class="skill-list">
+                <li class="skill-item">
+                    <div class="skill-name"><span>中文</span><span>母语</span></div>
+                    <div class="skill-bar"><div class="skill-fill" style="width: 100%;"></div></div>
+                </li>
+                <li class="skill-item">
+                    <div class="skill-name"><span>英语</span><span>流利</span></div>
+                    <div class="skill-bar"><div class="skill-fill" style="width: 85%;"></div></div>
+                </li>
+            </ul>
+
+            <!-- 兴趣爱好 -->
+            <h2 class="section-title"><i class="fas fa-heart"></i>兴趣爱好</h2>
+            <div class="tag-list">
+                <span class="tag">📚 阅读</span>
+                <span class="tag">🏃 跑步</span>
+                <span class="tag">📷 摄影</span>
+                <span class="tag">🎵 音乐</span>
+                <span class="tag">✈️ 旅行</span>
+                <span class="tag">🎮 游戏</span>
+            </div>
+        </aside>
+
+        <!-- ===== 右侧栏 ===== -->
+        <main class="main">
+            <!-- 关于我 -->
+            <section class="main-section">
+                <h2 class="main-title"><i class="fas fa-user"></i>关于我</h2>
+                <p class="about-text">
+                    拥有 <strong>5 年</strong>前端开发经验的工程师，专注于现代 Web 应用开发。
+                    熟悉主流前端框架与工程化方案，对性能优化、用户体验和代码质量有深入理解。
+                    曾主导多个大型项目从 0 到 1 的搭建，善于跨团队协作，推动技术规范落地。
+                    热爱技术分享与开源社区，希望用技术创造更大价值。
+                </p>
+            </section>
+
+            <!-- 工作经历 -->
+            <section class="main-section">
+                <h2 class="main-title"><i class="fas fa-briefcase"></i>工作经历</h2>
+
+                <div class="timeline-item">
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">高级前端工程师</div>
+                            <div class="item-subtitle">某互联网科技公司 · 平台研发部</div>
+                        </div>
+                        <span class="item-date">2023.06 - 至今</span>
+                    </div>
+                    <div class="item-content">
+                        <ul>
+                            <li>负责公司核心 SaaS 产品前端架构设计与开发，支撑日均百万级 PV</li>
+                            <li>推动微前端架构落地，将多个独立业务模块统一整合，提升团队协作效率 40%</li>
+                            <li>主导性能优化专项，首屏加载时间从 4.5s 降至 1.8s</li>
+                            <li>建立组件库与开发规范，新人上手时间缩短 50%</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">前端开发工程师</div>
+                            <div class="item-subtitle">某知名电商公司 · 用户增长团队</div>
+                        </div>
+                        <span class="item-date">2020.03 - 2023.05</span>
+                    </div>
+                    <div class="item-content">
+                        <ul>
+                            <li>参与营销活动平台开发，支持双 11、618 等大促活动，峰值 QPS 10w+</li>
+                            <li>基于 React + TypeScript 搭建可视化活动编辑器，降低运营成本 60%</li>
+                            <li>负责 H5 移动端框架开发，输出通用组件 50+</li>
+                            <li>获得 2021 年度优秀员工奖</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">初级前端开发工程师</div>
+                            <div class="item-subtitle">某创业公司 · 产品研发组</div>
+                        </div>
+                        <span class="item-date">2019.07 - 2020.02</span>
+                    </div>
+                    <div class="item-content">
+                        <ul>
+                            <li>负责内部管理系统前端开发，使用 Vue + Element UI</li>
+                            <li>独立完成数据可视化大屏项目，支持多维度数据展示</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 项目经验 -->
+            <section class="main-section">
+                <h2 class="main-title"><i class="fas fa-rocket"></i>项目经验</h2>
+
+                <div class="timeline-item">
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">企业级 SaaS 协作平台</div>
+                            <div class="item-subtitle">主程 / 架构设计</div>
+                        </div>
+                        <span class="item-date">2023.06 - 2024.03</span>
+                    </div>
+                    <div class="item-content">
+                        <p>面向 B 端用户的协作工具，覆盖文档、表格、流程等场景，服务超过 2000 家企业客户。</p>
+                        <div class="project-tags">
+                            <span class="project-tag">React 18</span>
+                            <span class="project-tag">TypeScript</span>
+                            <span class="project-tag">qiankun</span>
+                            <span class="project-tag">WebSocket</span>
+                            <span class="project-tag">Monorepo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">可视化营销活动平台</div>
+                            <div class="item-subtitle">核心开发</div>
+                        </div>
+                        <span class="item-date">2021.09 - 2022.08</span>
+                    </div>
+                    <div class="item-content">
+                        <p>支持拖拽搭建营销活动页面，覆盖 H5、小程序等多端，累计上线活动 1000+。</p>
+                        <div class="project-tags">
+                            <span class="project-tag">React</span>
+                            <span class="project-tag">拖拽</span>
+                            <span class="project-tag">Schema</span>
+                            <span class="project-tag">低代码</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">开源 UI 组件库 (个人项目)</div>
+                            <div class="item-subtitle">作者 / 维护者</div>
+                        </div>
+                        <span class="item-date">持续维护中</span>
+                    </div>
+                    <div class="item-content">
+                        <p>基于 React 的轻量级组件库，GitHub ⭐ 3k+，提供 30+ 高质量组件。</p>
+                        <div class="project-tags">
+                            <span class="project-tag">React</span>
+                            <span class="project-tag">TypeScript</span>
+                            <span class="project-tag">Storybook</span>
+                            <span class="project-tag">Vite</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 教育背景 -->
+            <section class="main-section">
+                <h2 class="main-title"><i class="fas fa-graduation-cap"></i>教育背景</h2>
+
+                <div class="timeline-item">
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">计算机科学与技术 · 本科</div>
+                            <div class="item-subtitle">某重点大学 · 校级奖学金 ×2</div>
+                        </div>
+                        <span class="item-date">2015.09 - 2019.06</span>
+                    </div>
+                    <div class="item-content">
+                        主修课程：数据结构、操作系统、计算机网络、数据库、Web 开发等
+                    </div>
+                </div>
+            </section>
+
+            <!-- 荣誉奖项 -->
+            <section class="main-section">
+                <h2 class="main-title"><i class="fas fa-trophy"></i>荣誉奖项</h2>
+
+                <div class="timeline-item">
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">2021 年度优秀员工</div>
+                            <div class="item-subtitle">某知名电商公司</div>
+                        </div>
+                        <span class="item-date">2022.01</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">ACM 区域赛 · 铜奖</div>
+                            <div class="item-subtitle">团队赛</div>
+                        </div>
+                        <span class="item-date">2018.05</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
