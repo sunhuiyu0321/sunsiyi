@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录 - 智能云AI电商在线销售系统</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="brand"><span class="logo">☁️</span><span>智能云AI电商</span></div>
+      <div class="auth-head">
+        <h2>用户登录</h2>
+        <p>欢迎回来，请使用账号密码登录</p>
+      </div>
+
+      <form id="login-form">
+        <div class="field">
+          <label for="login-username">账号</label>
+          <input id="login-username" type="text" placeholder="请输入账号" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="login-password">密码</label>
+          <input id="login-password" type="password" placeholder="请输入密码" autocomplete="current-password" required>
+        </div>
+        <div id="login-msg" class="form-msg"></div>
+        <button type="submit" class="btn btn-primary btn-block">登录</button>
+      </form>
+
+      <div class="auth-foot">
+        还没有账号？<a href="register.html">立即注册</a>
+      </div>
+    </div>
+  </div>
+  <script src="js/shop.js"></script>
+</body>
+</html>
