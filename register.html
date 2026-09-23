@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>注册 - 智能云AI电商在线销售系统</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="brand"><span class="logo">☁️</span><span>智能云AI电商</span></div>
+      <div class="auth-head">
+        <h2>用户注册</h2>
+        <p>创建账号，开启智能购物之旅</p>
+      </div>
+
+      <form id="register-form">
+        <div class="field">
+          <label for="reg-username">账号</label>
+          <input id="reg-username" type="text" placeholder="至少 4 位字符" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="reg-password">密码</label>
+          <input id="reg-password" type="password" placeholder="至少 6 位字符" autocomplete="new-password" required>
+        </div>
+        <div class="field">
+          <label for="reg-confirm">确认密码</label>
+          <input id="reg-confirm" type="password" placeholder="再次输入密码" autocomplete="new-password" required>
+        </div>
+        <div id="reg-msg" class="form-msg"></div>
+        <button type="submit" class="btn btn-primary btn-block">注册</button>
+      </form>
+
+      <div class="auth-foot">
+        已有账号？<a href="login.html">去登录</a>
+      </div>
+    </div>
+  </div>
+  <script src="js/shop.js"></script>
+</body>
+</html>
